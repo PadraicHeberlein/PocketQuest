@@ -1,7 +1,6 @@
-﻿using System;
-using LinearAlgebra;
+﻿using PocketQuest.Graphics.LinearAlgebraR3;
 
-namespace Graphics3D
+namespace PocketQuest.Graphics.Shapes
 {
     public class Rectangle : Polygon
     {
@@ -20,10 +19,10 @@ namespace Graphics3D
         // copy constructor
         public Rectangle(Rectangle rec) : base(rec) { }
         // toString method for printing values for testing
-        public override String ToString()
+        public override string ToString()
         {
             VectorR3[] corners = GetVertices();
-            String s = "[ ";
+            string s = "[ ";
 
             for (int node = 0; node < NUM_SIDES; node++)
                 s += corners[node] + " ";

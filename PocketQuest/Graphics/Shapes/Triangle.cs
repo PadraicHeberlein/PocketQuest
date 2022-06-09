@@ -1,6 +1,6 @@
-﻿using LinearAlgebra;
+﻿using PocketQuest.Graphics.LinearAlgebraR3;
 
-namespace Graphics3D
+namespace PocketQuest.Graphics.Shapes
 {
     public class Triangle : Polygon
     {
@@ -10,7 +10,7 @@ namespace Graphics3D
         public const int SIDE_3 = 2;
         public const int NUM_SIDES = 3;
         // default constructor
-        public Triangle() : base(NUM_SIDES) {  }
+        public Triangle() : base(NUM_SIDES) { }
         // vector constructor
         public Triangle(VectorR3[] corners) : base(corners) { }
         // point constructor
@@ -25,9 +25,9 @@ namespace Graphics3D
             double beta = CalculateBeta(p);
             double gamma = CalculateGamma(p);
 
-            bool alphaIn = (0 < alpha) && (alpha < 1);
-            bool betaIn = (0 < beta) && (beta < 1);
-            bool gammaIn = (0 < gamma) && (gamma < 1);
+            bool alphaIn = 0 < alpha && alpha < 1;
+            bool betaIn = 0 < beta && beta < 1;
+            bool gammaIn = 0 < gamma && gamma < 1;
 
             return alphaIn && betaIn && gammaIn;
         }
@@ -41,7 +41,7 @@ namespace Graphics3D
             VectorR3 na = c.Sub(b).Cross(test.Sub(b));
             double magSquared = GetNormal().MagSquared();
 
-            return (1 / magSquared) * GetNormal().Dot(na);
+            return 1 / magSquared * GetNormal().Dot(na);
         }
         private double CalculateBeta(PointR3 p)
         {
@@ -52,7 +52,7 @@ namespace Graphics3D
             VectorR3 nb = a.Sub(c).Cross(test.Sub(c));
             double magSquared = GetNormal().MagSquared();
 
-            return (1 / magSquared) * GetNormal().Dot(nb);
+            return 1 / magSquared * GetNormal().Dot(nb);
         }
         private double CalculateGamma(PointR3 p)
         {
@@ -63,7 +63,7 @@ namespace Graphics3D
             VectorR3 nc = b.Sub(a).Cross(test.Sub(a));
             double magSquared = GetNormal().MagSquared();
 
-            return (1 / magSquared) * GetNormal().Dot(nc);
+            return 1 / magSquared * GetNormal().Dot(nc);
         }
     }
 }

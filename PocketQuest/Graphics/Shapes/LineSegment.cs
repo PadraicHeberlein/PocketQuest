@@ -1,6 +1,6 @@
-﻿using LinearAlgebra;
+﻿using PocketQuest.Graphics.LinearAlgebraR3;
 
-namespace Graphics3D
+namespace PocketQuest.Graphics.Shapes
 {
     public class LineSegmentR3 : LineR3
     {

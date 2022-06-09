@@ -1,4 +1,4 @@
-﻿namespace LinearAlgebra
+﻿namespace PocketQuest.Graphics.LinearAlgebraR3
 {
     public class PlaneR3
     {

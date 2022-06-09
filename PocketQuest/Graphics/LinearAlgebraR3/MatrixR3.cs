@@ -1,13 +1,14 @@
 ﻿using System;
 
-namespace LinearAlgebra
+namespace PocketQuest.Graphics.LinearAlgebraR3
 {
     public class MatrixR3
     {
         // constants and common matrices
         public const int n = CoordinateR3.DIMENSIONS;
         public static MatrixR3 ZERO = new MatrixR3();
-        public static MatrixR3 I = new MatrixR3(VectorR3.E1, VectorR3.E2, VectorR3.E3, false);
+        public static MatrixR3 I = 
+            new MatrixR3(VectorR3.E1, VectorR3.E2, VectorR3.E3, false);
         // private members
         private double[,] e;
         // default constructor
@@ -245,9 +246,15 @@ namespace LinearAlgebra
         }
         public override String ToString()
         {
-            return " | " + String.Format("%,.2f", e[0,0]) + "  " + String.Format("%,.2f", e[0,1]) + "  " + String.Format("%,.2f", e[0,2]) + " |\n" +
-                   " | " + String.Format("%,.2f", e[1,0]) + "  " + String.Format("%,.2f", e[1,1]) + "  " + String.Format("%,.2f", e[1,2]) + " |\n" +
-                   " | " + String.Format("%,.2f", e[2,0]) + "  " + String.Format("%,.2f", e[2,1]) + "  " + String.Format("%,.2f", e[2,2]) + " |\n";
+            return " | " + String.Format("%,.2f", e[0,0]) + "  " 
+                + String.Format("%,.2f", e[0,1]) + "  " 
+                + String.Format("%,.2f", e[0,2]) + " |\n" + " | " 
+                + String.Format("%,.2f", e[1,0]) + "  " 
+                + String.Format("%,.2f", e[1,1]) + "  " 
+                + String.Format("%,.2f", e[1,2]) + " |\n" + " | " 
+                + String.Format("%,.2f", e[2,0]) + "  " 
+                + String.Format("%,.2f", e[2,1]) + "  " 
+                + String.Format("%,.2f", e[2,2]) + " |\n";
         }
     }
 }

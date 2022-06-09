@@ -1,6 +1,6 @@
-﻿using LinearAlgebra;
+﻿using PocketQuest.Graphics.LinearAlgebraR3;
 
-namespace Graphics3D
+namespace PocketQuest.Environment
 {
     public interface IGameObject3D
     {

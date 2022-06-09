@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace LinearAlgebra
+﻿namespace PocketQuest.Graphics.LinearAlgebraR3
 {
     public class Constants
     {

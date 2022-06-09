@@ -1,4 +1,4 @@
-﻿namespace Graphics3D
+﻿namespace PocketQuest.GamePlay
 {
     public class Rotator : MoveAction
     {

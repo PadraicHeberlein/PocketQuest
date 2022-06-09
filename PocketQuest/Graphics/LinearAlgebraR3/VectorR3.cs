@@ -1,11 +1,10 @@
-﻿using System;
-
-namespace LinearAlgebra
+﻿namespace PocketQuest.Graphics.LinearAlgebraR3
 {
     public class VectorR3 : PointR3
     {
         // public readonly vectors 
-        public static readonly VectorR3 ZERO_VECTOR = new VectorR3(PointR3.ORIGIN);
+        public static readonly VectorR3 ZERO_VECTOR = 
+            new VectorR3(PointR3.ORIGIN);
         public static readonly VectorR3 E1 = new VectorR3(PointR3.E1_POINT);
         public static readonly VectorR3 E2 = new VectorR3(PointR3.E2_POINT);
         public static readonly VectorR3 E3 = new VectorR3(PointR3.E3_POINT);
@@ -91,7 +90,7 @@ namespace LinearAlgebra
         {
             return Math.Abs(Dot(v)) < Constants.ZERO;
         }
-        // method to check if two parallel vectors are in the same direction\
+        // method to check if two parallel vectors are in the same direction
         public bool IsInSameDirection(VectorR3 v)
         {
             if(!IsParallelTo(v))
@@ -139,7 +138,9 @@ namespace LinearAlgebra
         // toString method for printing in tests
         public override String ToString()
         { 
-            return " <" + String.Format("%,.2f", Get(X)) + ", " + String.Format("%,.2f", Get(Y)) + ", " + String.Format("%,.2f", Get(Z)) + "> ";
+            return " <" + String.Format("%,.2f", Get(X)) 
+                + ", " + String.Format("%,.2f", Get(Y)) 
+                + ", " + String.Format("%,.2f", Get(Z)) + "> ";
         }
     }
 }

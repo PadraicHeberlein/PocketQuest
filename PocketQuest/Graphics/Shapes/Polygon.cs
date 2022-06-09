@@ -1,8 +1,7 @@
-﻿using System;
-using System.Drawing;
-using LinearAlgebra;
+﻿using PocketQuest.Environment;
+using PocketQuest.Graphics.LinearAlgebraR3;
 
-namespace Graphics3D
+namespace PocketQuest.Graphics.Shapes
 {
     public class Polygon : PlaneR3, IVisibleObject3D
     {
@@ -27,7 +26,9 @@ namespace Graphics3D
         // right hand rule for the normal vector to
         // follow convention, i.e., starting from
         // vertices[0] they must point in a CCW direction
-        public Polygon(VectorR3[] corners) : base(corners[P0].ToPoint(), corners[P1].ToPoint(), corners[P2].ToPoint())
+        public Polygon(VectorR3[] corners) : 
+            base(corners[P0].ToPoint(), corners[P1].ToPoint(), 
+            corners[P2].ToPoint())
         {
             n = corners.Length;
             vertices = new VectorR3[n];
@@ -35,7 +36,8 @@ namespace Graphics3D
                 vertices[node] = new VectorR3(corners[node]);
         }
         // point array constructor
-        public Polygon(PointR3[] corners) : base(corners[P0], corners[P1], corners[P2])
+        public Polygon(PointR3[] corners) : 
+            base(corners[P0], corners[P1], corners[P2])
         {
             n = corners.Length;
             vertices = new VectorR3[n];
@@ -46,7 +48,9 @@ namespace Graphics3D
             }
         }
         // copy constructor
-        public Polygon(Polygon p) : base(p.vertices[0].ToPoint(), p.vertices[1].ToPoint(), p.vertices[2].ToPoint())
+        public Polygon(Polygon p) : 
+            base(p.vertices[0].ToPoint(), p.vertices[1].ToPoint(), 
+            p.vertices[2].ToPoint())
         {
 
             vertices = new VectorR3[NumSides()];
@@ -66,7 +70,7 @@ namespace Graphics3D
                 try
                 {
                     ip = ray.FindIntersectionWith(this);
-                    if (!(eye.IsOnSameSideOf(screen, ip)) && Contains(ip))
+                    if (!eye.IsOnSameSideOf(screen, ip) && Contains(ip))
                     {
                         // System.out.println(ip);
                         return true;
@@ -79,10 +83,11 @@ namespace Graphics3D
         // gets the values of the vertices
         public VectorR3[] GetVertices()
         {
-            // NOTE: this smells... will have to try to find another way of doing
-            // this. LineR3 and PlaneR3 form LinearAlgebra both rely on the 
-            // points from the PlanR3 class to do much needed math, but these
-            // points also need to get moved with the IVisibleObject3D...
+            // NOTE: this smells... will have to try to find another way of
+            // doing this. LineR3 and PlaneR3 form LinearAlgebra both rely
+            // on the points from the PlanR3 class to do much needed math,
+            // but these points also need to get moved with the
+            // IVisibleObject3D...
             // ...the SetVertex method below suffers from the same thing!
             int n = vertices.Length;
             int numPlanePoints = 3;  // 3 points define a plane in R3

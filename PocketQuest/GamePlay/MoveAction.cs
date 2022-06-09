@@ -1,6 +1,7 @@
-﻿using LinearAlgebra;
+﻿using PocketQuest.Graphics.LinearAlgebraR3;
+using PocketQuest.Environment;
 
-namespace Graphics3D
+namespace PocketQuest.GamePlay
 {
     public abstract class MoveAction
     {
