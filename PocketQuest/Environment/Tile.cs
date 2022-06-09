@@ -44,6 +44,29 @@ namespace PocketQuest.Environment
             gridLocation = corners[0].ToPoint();
         }
 
+        public Tile(PointR3[] corners)
+        {
+            mesh = new List<Triangle>();
+            // Create list to instantiate back triangle...
+            List<VectorR3> backCorners = new List<VectorR3>();
+            backCorners.Add(corners[0].ToVector());
+            backCorners.Add(corners[1].ToVector());
+            backCorners.Add(corners[2].ToVector());
+            // ...create list to instantiate front triangle...
+            List<VectorR3> frontCorners = new List<VectorR3>();
+            frontCorners.Add(corners[1].ToVector());
+            frontCorners.Add(corners[2].ToVector());
+            frontCorners.Add(corners[3].ToVector());
+            // Instantiate triangles...
+            Triangle back = new Triangle(backCorners.ToArray());
+            Triangle front = new Triangle(frontCorners.ToArray());
+            // ...add to mesh...
+            mesh.Add(back);
+            mesh.Add(front);
+            // ...and get the grid location.
+            gridLocation = corners[0];
+        }
+
         public List<Triangle> GetMesh() { return mesh; }
     }
 }
