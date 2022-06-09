@@ -1,8 +1,8 @@
 ﻿namespace PocketQuest.Environment
 {
-    internal class Lane
+    public class Lane
     {
-        LaneElevation[] elevations;
-        //Tile[] mesh;
+        float[] elevations;
+        Tile[] mesh;
     }
 }

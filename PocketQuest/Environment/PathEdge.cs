@@ -1,7 +1,7 @@
 ﻿namespace PocketQuest.Environment
 {
-    public class MainPath
+    public class PathEdge : Lane
     {
-        Lane[] lanes;
+
     }
 }
