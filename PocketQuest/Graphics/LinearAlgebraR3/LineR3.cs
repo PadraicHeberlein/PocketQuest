@@ -1,4 +1,4 @@
-﻿// TODO: Add comments...
+﻿// TODO: Add comments and bring up to visual standards...!
 using System;
 
 namespace PocketQuest.Graphics.LinearAlgebraR3
