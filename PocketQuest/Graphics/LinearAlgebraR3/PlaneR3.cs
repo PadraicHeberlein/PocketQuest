@@ -2,37 +2,37 @@
 {
     public class PlaneR3
     {
-        // NOTE: These constants DO NOT correspond to
-        // the point constants in class Point. In
-        // Point they are three points on the plane,
-        // here R1 & R2 represent all sets of parallel 
-        // planes, where R0 fixes a specific plane.
-        // enumeration constants for vectors
+        /* NOTE: These constants DO NOT correspond to the point 
+         * constants in class Point. In Point they are three 
+         * points on the plane, here R1 & R2 represent all sets 
+         * of parallel planes, where R0 fixes a specific plane.     */
+
+        // Enumeration constants for vectors:
         public const int R0 = 0;
         public const int R1 = 1;
         public const int R2 = 2;
-        // enumeration constants for the EQ of a plane
+        // Enumeration constants for the EQ of a plane:
         public const int A = 0;
         public const int B = 1;
         public const int C = 2;
         public const int D = 3;
-        // private class members
+        // Private class members:
         private PointR3 p0, p1, p2;
-        // default constructor
+        // Default constructor:
         public PlaneR3()
         {
             p0 = new PointR3();
             p1 = new PointR3();
             p2 = new PointR3();
         }
-        // point constructor
+        // Point constructor:
         public PlaneR3(PointR3 point0, PointR3 point1, PointR3 point2)
         {
             p0 = new PointR3(point0);
             p1 = new PointR3(point1);
             p2 = new PointR3(point2);
         }
-        // vector / point constructor
+        // Vector/point constructor:
         public PlaneR3(VectorR3 r1, VectorR3 r2, PointR3 p)
         {
             VectorR3 r0 = new VectorR3(p);
@@ -40,14 +40,13 @@
             p1 = r0.Add(r1).ToPoint();
             p2 = r0.Add(r2).ToPoint();
         }
-        // get method for vector normal to the plane
+        // Getters and setters:
         public VectorR3 GetNormal()
         {
             VectorR3 r1 = GetVector(R1);
             VectorR3 r2 = GetVector(R2);
             return r1.Cross(r2);
         }
-        // get one of the three points that define the plane
         public PointR3 GetPoint(int point)
         {
             PointR3 toGet = new PointR3();
@@ -65,7 +64,6 @@
             }
             return toGet;
         }
-        // set one of the three points that define the plane
         public void SetPoint(int point, PointR3 p)
         {
             switch (point)
@@ -81,7 +79,6 @@
                     break;
             }
         }
-        // get one of the three Vectors that define the plane
         public VectorR3 GetVector(int vector)
         {
 
@@ -104,9 +101,11 @@
             }
             return r;
         }
-        // method to get the constants from the equation
-        // f(x,y,z) = ax + by + bz + d, where
-        // f(x,y,z) = 0 means (x,y,z) is on the plane.
+        /* Method to get the constants from the equation 
+         * 
+         * f(x,y,z) = ax + by + bz + d, 
+         * 
+         * where f(x,y,z) = 0 means (x,y,z) is on the plane.  */
         public double GetEQConstants(int constant)
         {
             double value = 0.0;
@@ -127,8 +126,8 @@
             }
             return value;
         }
-        // function representing the function
-        // f(x,y,z) = ax + by + cz + d
+        /* Method F() representing the function:
+         * f(x,y,z) = ax + by + cz + d                          */
         public double F(PointR3 p)
         {
             double a, b, c, d, x, y, z;
@@ -144,7 +143,7 @@
 
             return a * x + b * y + c * z + d;
         }
-        // private method to calculate constant d in f(x,y,z)
+        // Method to calculate constant d in f(x,y,z) from above.
         private double CalculateConstantTermD()
         {
             VectorR3 r0 = new VectorR3(p0);

@@ -4,21 +4,21 @@ namespace PocketQuest.Graphics.Shapes
 {
     public class Triangle : Polygon
     {
-        // enumeration constants
+        // Enumeration constants:
         public const int SIDE_1 = 0;
         public const int SIDE_2 = 1;
         public const int SIDE_3 = 2;
         public const int NUM_SIDES = 3;
-        // default constructor
+        // Default constructor:
         public Triangle() : base(NUM_SIDES) { }
-        // vector constructor
+        // Vector constructor:
         public Triangle(VectorR3[] corners) : base(corners) { }
-        // point constructor
+        // Point constructor:
         public Triangle(PointR3[] corners) : base(corners) { }
-        // copy constructor
+        // Copy constructor:
         public Triangle(Triangle t) : base(t) { }
-        // method to check if this traiange contains point p
-        // making use of barycentric coordinates
+        /* Method to check if this traiange contains point p
+         * making use of barycentric coordinates.           */
         new public bool Contains(PointR3 p)
         {
             double alpha = CalculateAlpha(p);
@@ -31,7 +31,7 @@ namespace PocketQuest.Graphics.Shapes
 
             return alphaIn && betaIn && gammaIn;
         }
-        // private methods for generating barycentric coordinates
+        // Private methods for generating barycentric coordinates:
         private double CalculateAlpha(PointR3 p)
         {
             VectorR3[] vertices = GetVertices();

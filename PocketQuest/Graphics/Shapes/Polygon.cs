@@ -5,15 +5,15 @@ namespace PocketQuest.Graphics.Shapes
 {
     public class Polygon : PlaneR3, IVisibleObject3D
     {
-        // named constants for the points that define a plane
+        // Named constants for the points that define a plane:
         private const int P0 = PointR3.P0;
         private const int P1 = PointR3.P1;
         private const int P2 = PointR3.P2;
-        // private class members
+        // Private class members:
         private VectorR3[] vertices;
         private int n;
         private Color color;
-        // default constructor for child classes
+        // Default constructor for child classes
         public Polygon(int numberOfSides) : base()
         {
             vertices = new VectorR3[numberOfSides];
@@ -21,11 +21,11 @@ namespace PocketQuest.Graphics.Shapes
             for (int node = 0; node < n; node++)
                 vertices[node] = new VectorR3();
         }
-        // vector array constructor
-        // NOTE: vector orientation must follow the
-        // right hand rule for the normal vector to
-        // follow convention, i.e., starting from
-        // vertices[0] they must point in a CCW direction
+        // Vector array constructor:
+        /* NOTE: vector orientation must follow the right- 
+         * hand rule for the normal vector tofollow convention, 
+         * i.e., starting from vertices[0] they must point in 
+         * a C.C.W. direction!                                  */
         public Polygon(VectorR3[] corners) : 
             base(corners[P0].ToPoint(), corners[P1].ToPoint(), 
             corners[P2].ToPoint())
@@ -35,7 +35,7 @@ namespace PocketQuest.Graphics.Shapes
             for (int node = 0; node < n; node++)
                 vertices[node] = new VectorR3(corners[node]);
         }
-        // point array constructor
+        // Point array constructor:
         public Polygon(PointR3[] corners) : 
             base(corners[P0], corners[P1], corners[P2])
         {
@@ -47,7 +47,7 @@ namespace PocketQuest.Graphics.Shapes
                 // System.out.println(vertices[node]);
             }
         }
-        // copy constructor
+        // Copy constructor:
         public Polygon(Polygon p) : 
             base(p.vertices[0].ToPoint(), p.vertices[1].ToPoint(), 
             p.vertices[2].ToPoint())
@@ -58,7 +58,7 @@ namespace PocketQuest.Graphics.Shapes
                 vertices[node] = new VectorR3(p.vertices[node]);
         }
 
-        // method to check if this is hit by ray coming from user's screen
+        // Method to check if this is hit by ray coming from user's screen.
         public bool IsProjectedOnTo(PlaneR3 screen, LineR3 ray)
         {
             PointR3 eye = ray.GetOrigin();
@@ -80,7 +80,7 @@ namespace PocketQuest.Graphics.Shapes
             }
             return false;
         }
-        // gets the values of the vertices
+        // Getters and setters:
         public VectorR3[] GetVertices()
         {
             // NOTE: this smells... will have to try to find another way of
@@ -90,19 +90,18 @@ namespace PocketQuest.Graphics.Shapes
             // IVisibleObject3D...
             // ...the SetVertex method below suffers from the same thing!
             int n = vertices.Length;
-            int numPlanePoints = 3;  // 3 points define a plane in R3
+            int numPlanePoints = 3;  // 3 points define a plane in R3!
             VectorR3[] planeVertices = new VectorR3[numPlanePoints];
             planeVertices[0] = GetPoint(PointR3.P0).ToVector();
             planeVertices[1] = GetPoint(PointR3.P1).ToVector();
             planeVertices[2] = GetPoint(PointR3.P2).ToVector();
-            // the plane vertices get tacked on at the end
+            // ...the plane vertices get tacked on at the end...
             VectorR3[] allVertices = new VectorR3[n + numPlanePoints];
             vertices.CopyTo(allVertices, 0);
             planeVertices.CopyTo(allVertices, n);
 
             return allVertices;
         }
-        // sets the values of the vertices
         public void SetVertex(int index, VectorR3 vertex)
         {
             int n = vertices.Length;
@@ -114,35 +113,25 @@ namespace PocketQuest.Graphics.Shapes
                 SetPoint(planeIndex, vertex.ToPoint());
             }
         }
-        // get method for the number of vertices this has
-        public int NumSides()
-        {
-            return n;
-        }
-        // get and set methods for the color of this polygon
-        public Color GetColor(LineR3 ray)
-        {
-            return color;
-        }
-        public void SetColor(Color newColor, LineR3 ray)
-        {
-            color = newColor;
-        }
-        // method for determining if a point is contained in this polygon
+        public int NumSides() { return n; }
+        public Color GetColor(LineR3 ray) { return color; }
+        public void SetColor(Color newColor, LineR3 ray) { color = newColor; }
+        // Method for determining if a point is contained in this polygon.
         public bool Contains(PointR3 p)
         {
-            // is p isn't even on this plane we can
-            // return false immediately
+            /* If point p isn't even on this plane we can return 
+             * false immediately.                                       */
             if (!p.IsOnPlane(this))
                 return false;
-            // the vector along a side conforming to the right hand rule
-            // when crossed with normal vector of this polygon, will
-            // produce a vector on this plane pointing outward
+            /* The vector along a side conforming to the right-hand 
+             * rule when crossed with normal vector of this polygon, 
+             * will produce a vector on the same plane, but pointing 
+             * outward with respect to the polygon.                     */
             PlaneR3[] sidePlanes = new PlaneR3[n];
             VectorR3 normal = GetNormal();
             int numPlainsIsUnder = 0;
-            // loop over all sides and construct a plane perpendicular
-            // to each side with outwards facing normal
+            /* Loop over all sides and construct a plane perpendicular 
+             * to each side with outwards facing normal                 */
             for (int side = 0; side < n; side++)
             {
                 VectorR3 sideDir;
@@ -152,14 +141,14 @@ namespace PocketQuest.Graphics.Shapes
                     sideDir = vertices[side + 1].Sub(vertices[side]);
                 sidePlanes[side] = new PlaneR3(sideDir, normal, vertices[side].ToPoint());
             }
-            // check how many side-planes p is under, i.e,  
-            // on the side oposite from normal facing
+            /* Check how many side-planes p is under, i.e, on the 
+             * side oposite from normal facing.                         */
             for (int side = 0; side < n; side++)
             {
                 if (sidePlanes[side].F(p) < 0)
                     numPlainsIsUnder++;
             }
-            // if its under all of them, the this polygon contains p
+            // If its under all of them, then this polygon contains p!
             return numPlainsIsUnder == n ? true : false;
         }
     }

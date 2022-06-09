@@ -4,72 +4,71 @@ namespace PocketQuest.Graphics.LinearAlgebraR3
 {
     public class PointR3
     {
-        // public readonly common points
+        // Public readonly common points:
         public static readonly PointR3 ORIGIN = new PointR3(0.0,0.0,0.0);
         public static readonly PointR3 E1_POINT = new PointR3(1.0,0.0,0.0);
         public static readonly PointR3 E2_POINT = new PointR3(0.0,1.0,0.0);
         public static readonly PointR3 E3_POINT = new PointR3(0.0,0.0,1.0);
-        // enumeration constants for each point that defines 
-        // a plane or vector
+        // Enumeration constants for points defining a plane or vector:
         public const int P0 = 0;
         public const int P1 = 1;
         public const int P2 = 2;
-        // private class members
+        // Private class members:
         private double x, y, z;
-        // default constructor
+        // Default constructor
         public PointR3()
         {
             x = 0.0;
             y = 0.0;
             z = 0.0;
         }
-        // coordinate constructor
+        // Coordinate constructor:
         public PointR3(double xp, double yp, double zp)
         {
             x = xp;
             y = yp;
             z = zp;
         }
-        // copy constructor
+        // Copy constructor:
         public PointR3(PointR3 p)
         {
             x = p.x;
             y = p.y;
             z = p.z;
         }
-        // vector constructor
+        // Vector constructor:
         public PointR3(VectorR3 v)
         {
             x = v.Get(CoordinateR3.X);
             y = v.Get(CoordinateR3.Y);
             z = v.Get(CoordinateR3.Z);
         }
-        // method for up-casting to a vector
+        // Method for up-casting to a vector:
         public VectorR3 ToVector()
         {
             return new VectorR3(x, y, z);
         }
-        // multiply point by -1
+        // Multiply point by -1:
         public PointR3 Neg()
         {
             return new PointR3(-x, -y, -z);
         }
-        // add two points
+        // Add two points:
         public PointR3 Add(PointR3 p)
         {
             return new PointR3(x + p.x, y + p.y, z + p.z);
         }
-        // subtract two points
+        // Subtract two points:
         public PointR3 Sub(PointR3 p)
         {
             return Add(p.Neg());
         }
-        // multiply point by a scalar
+        // Multiply point by a scalar:
         public PointR3 Sx(double scalar)
         {
             return new PointR3(scalar * x, scalar * y, scalar * z);
         }
-        // get method based on enumeration constants
+        // Get method based on enumeration constants:
         public double Get(int coordinate)
         {
             double toReturn = 0;
@@ -87,7 +86,7 @@ namespace PocketQuest.Graphics.LinearAlgebraR3
             }
             return toReturn;
         }
-        // set method based on final constants for index
+        // Set method based on final constants for index:
         public void Set(int coordinate, double coordinateValue)
         {
             switch (coordinate)
@@ -103,32 +102,31 @@ namespace PocketQuest.Graphics.LinearAlgebraR3
                     break;
             }
         }
-        // to check whether a point is on the given plane
+        // To check whether a point is on the given plane:
         public bool IsOnPlane(PlaneR3 pl)
         {
             return Math.Abs(pl.F(this)) < Constants.ZERO;
         }
-        // method to determine if the given point is on 
-        // the same side of the given plane as this point
+        /* Method to determine if the given point is on 
+         * the same side of the given plane as this point.   */
         public bool IsOnSameSideOf(PlaneR3 pl, PointR3 p)
         {
-            // f(x,y,x) = ax + by + cz + d == 0 when 
-            // point (x,y,z) is on the plane, < 0 when 
-            // on one side and > 0 when on the other.
+            /* f(x,y,x) = ax + by + cz + d == 0 when 
+             * the point (x,y,z) is on the plane, < 0 when 
+             * on one side, and > 0 when on the other.       */
             if (IsOnPlane(pl) || p.IsOnPlane(pl))
                 return false;
             double thisSide = pl.F(this);
             double thatSide = pl.F(p);
-            // when this side and that side have the same 
-            // sign, i.e. they're on the same side, then
-            // there product is always positive
+            /* When this side and that side have the same 
+             * sign, i.e. they're on the same side, then 
+             * there product is always positive.            */
             return thisSide * thatSide > 0;
         }
-        // toString method for printing in tests
+        // toString() method for printing in tests:
         public override String ToString()
         {
             return " (" + x + ", " + y + ", " + z + ") ";
         }
-}
-
+    }
 }
