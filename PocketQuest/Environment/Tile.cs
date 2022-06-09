@@ -8,20 +8,19 @@ namespace PocketQuest.Environment
         private const int BACK = 0;
         private const int FRONT = 1;
 
-        private List<Triangle> mesh;
+        private readonly List<Triangle> mesh;
         private PointR3 gridLocation;
 
-        /* this constructor assumes vectors are orthogonal 
-         * and are all on the same plane!
+        /*  NOTE: This constructor assumes vectors are orthogonal 
+         *  and are all on the same plane! The arg corner[] has
+         *  indices labeled below with the point gridLocation at 
+         *  corner 0. Rendering order is from back to front.
          * 
-         * corner array indices and direction
-         * (gridLocation is at corner 0):
-         * 
-         *  0       1   y
-         *  |-------|   ^
-         *  |   /   |   |__> x
-         *  |-------|
-         *  2       3   */
+         *  0       1   0--> x      back:       front:
+         *  |-------|   |           0--1            1
+         *  |   /   |   V           | /           / |
+         *  |-------|   y           2            2--3
+         *  2       3                                           */
         public Tile(VectorR3[] corners)
         {
             mesh = new List<Triangle>();
@@ -45,5 +44,7 @@ namespace PocketQuest.Environment
 
             gridLocation = corners[0].ToPoint();
         }
+
+        public List<Triangle> GetMesh() { return mesh; }
     }
 }
