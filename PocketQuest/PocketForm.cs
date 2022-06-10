@@ -30,7 +30,8 @@ namespace PocketQuest
             background.Height = HEIGHT;
             background.Name = "background";
             background.Location = new Point(0, 0);
-            background.Image = (Bitmap)Bitmap.FromFile("scenery//background.png");        
+            background.Image = 
+                (Bitmap)Bitmap.FromFile("scenery//background.png");        
 
             this.Controls.Add(background);
         }
@@ -38,22 +39,27 @@ namespace PocketQuest
         protected override void OnKeyDown(KeyEventArgs e)
         {
             base.OnKeyDown(e);
-            Bitmap alteredBackground = (Bitmap)Bitmap.FromFile("scenery//background.png");
+            Bitmap alteredBackground = 
+                (Bitmap)Bitmap.FromFile("scenery//background.png");
             char keyValue = (char)e.KeyValue;
 
             switch (keyValue)
             {
                 case 'W':
-                    background.Image = player.Move(Direction.Up, alteredBackground);
+                    background.Image = 
+                        player.Move(Direction.Up, alteredBackground);
                     break;
                 case 'D':
-                    background.Image = player.Move(Direction.Right, alteredBackground);
+                    background.Image = 
+                        player.Move(Direction.Right, alteredBackground);
                     break;
                 case 'S':
-                    background.Image = player.Move(Direction.Down, alteredBackground);
+                    background.Image = 
+                        player.Move(Direction.Down, alteredBackground);
                     break;
                 case 'A':
-                    background.Image = player.Move(Direction.Left, alteredBackground);
+                    background.Image = 
+                        player.Move(Direction.Left, alteredBackground);
                     break;
             }
         }
